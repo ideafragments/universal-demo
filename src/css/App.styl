@@ -8,6 +8,45 @@ for page, color in pages
   .container button.loading.{page}
     color color[1] !important
 
+.info
+  display: flex
+  justify-content space-evenly
+  background-color: white
+  border-radius: 5px
+  width: 25%
+  color: #800080
+  height: 15%
+  font-size: 1.2rem
+  box-shadow: rgba(58, 58, 58, 0.3) 2px 3px 2px 2px
+  font-weight: 400
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif
+  align-items center
+.nav
+  border-radius: 5px
+  position: fixed 
+  left: 0
+  background-color: white
+  box-shadow: rgba(58, 58, 58, 0.3) 2px 3px 2px 2px
+  width: 15%
+  font-size: 1.1rem
+  top: 30%
+  ul
+    list-style-type: none
+    margin: 0
+    padding: 0
+    overflow: hidden;
+    li a 
+      border-radius: 5px
+      display: block
+      color: #800080
+      text-align: center
+      padding: 14px 16px
+      text-decoration: none
+      font-weight: 400
+      font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Arial, sans-serif
+      &:hover
+        background-color: #fff1fe
+
 .container
   display flex
   flex-direction column

@@ -1,15 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import createHistory from 'history/createBrowserHistory'
+import { BrowserRouter } from 'react-router-dom'
 import AppContainer from 'react-hot-loader/lib/AppContainer'
 import App from './components/App'
-
-const history = createHistory()
 
 const render = App =>
   ReactDOM.render(
     <AppContainer>
-      <App history={history} />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </AppContainer>,
     document.getElementById('root')
   )

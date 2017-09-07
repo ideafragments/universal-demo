@@ -2,7 +2,7 @@
   <img alt="Edit Redux-First Router Demo" src="http://cdn.reactlandia.com/chat-badge-reactlandia.png">
 </a>
 
-# Universal Demo
+# Universal Demo React Router 4 Boilderplate
 
 <p align="center">
   <img src="https://cdn.reactlandia.com/react-universal-component-demo-twitter.gif" />
