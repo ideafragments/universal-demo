@@ -13,15 +13,16 @@ This is a demo of how to use the *Universal* family of packages with RR4:
 - [react-universal-component](https://github.com/faceyspacey/react-universal-component) 
 - [webpack-flush-chunks](https://github.com/faceyspacey/webpack-flush-chunks)
 - [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin)
-- [babel-plugin-universal-import](https://github.com/faceyspacey/babel-plugin-universal-import) 
+- [babel-plugin-universal-import](https://github.com/faceyspacey/babel-plugin-universal-import)
+- [react-router v4](https://github.com/ReactTraining/react-router)  
 
 Feel free to use it as a boilerpate.
 
 ## Installation
 
 ```
-git clone https://github.com/faceyspacey/universal-demo.git
-cd universal-demo
+git clone https://github.com/ideafragments/universal-demo-react-router-4.git
+cd universal-demo-react-router-4
 yarn
 yarn start
 ```
