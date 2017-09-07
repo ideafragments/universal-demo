@@ -5,10 +5,10 @@
 # Universal Demo React Router 4 Boilderplate
 
 <p align="center">
-  <img src="https://cdn.reactlandia.com/react-universal-component-demo-twitter.gif" />
+  <img src="rr4-universal.gif" />
 </p>
 
-This is a demo of how to use the *Universal* family of packages:
+This is a demo of how to use the *Universal* family of packages with RR4:
 
 - [react-universal-component](https://github.com/faceyspacey/react-universal-component) 
 - [webpack-flush-chunks](https://github.com/faceyspacey/webpack-flush-chunks)

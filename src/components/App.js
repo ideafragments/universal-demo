@@ -184,7 +184,10 @@ class App extends React.Component {
     super(props)
 
     const index = 1
-    const page = props.location.pathname.substring(1)
+    let page = props.location.pathname.substring(1)
+    if (page === '') {
+      page = 'bar'
+    }
 
     this.state = {
       index,
