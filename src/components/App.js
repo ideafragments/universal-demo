@@ -1,6 +1,5 @@
 import React from 'react'
 import universal from 'react-universal-component'
-import Switch from 'react-router-dom/Switch'
 import Route from 'react-router-dom/Route'
 import Link from 'react-router-dom/Link'
 import { withRouter } from 'react-router-dom'
@@ -9,7 +8,6 @@ import styles from '../css/App'
 import UsageHero from './UsageHero'
 import Loading from './Loading'
 import NotFound from './NotFound'
-import { pages, nextIndex, indexFromPath } from '../utils'
 
 const UniversalComponent = universal(props => import(`./${props.page}`), {
   minDelay: 1200,
@@ -17,11 +15,11 @@ const UniversalComponent = universal(props => import(`./${props.page}`), {
   error: NotFound
 })
 
+const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1)
+
 class App extends React.Component {
   render() {
-    const { index, done, loading, page } = this.state
-    const loadingClass = loading ? styles.loading : ''
-    const buttonClass = `${styles[page]} ${loadingClass}`
+    const { done, page } = this.state
 
     return (
       <div className={styles.container}>
@@ -39,7 +37,7 @@ class App extends React.Component {
               </Link>
             </li>
             <li>
-              {' '}<Link to='/example' onClick={this.changePage}>
+              <Link to='/example' onClick={this.changePage}>
                 Example
               </Link>
             </li>
@@ -49,7 +47,7 @@ class App extends React.Component {
               </Link>
             </li>
             <li>
-              {' '}<Link to='/foo' onClick={this.changePage}>
+              <Link to='/foo' onClick={this.changePage}>
                 Foo
               </Link>
             </li>
@@ -72,101 +70,14 @@ class App extends React.Component {
         </nav>
         <h1>Hello Reactlandia - Minimal React Router 4 Boilerplate</h1>
         {done && <div className={styles.checkmark}>all loaded ✔</div>}
-
-        <Switch>
-          <Route
-            path='/'
-            exact
-            render={() =>
-              <UniversalComponent
-                page='Bar'
-                onBefore={this.beforeChange}
-                onAfter={this.afterChange}
-                onError={this.handleError}
-              />}
+        <Route>
+          <UniversalComponent
+            page={page}
+            onBefore={this.beforeChange}
+            onAfter={this.afterChange}
+            onError={this.handleError}
           />
-          <Route
-            path='/bar'
-            render={() =>
-              <UniversalComponent
-                page='Bar'
-                onBefore={this.beforeChange}
-                onAfter={this.afterChange}
-                onError={this.handleError}
-              />}
-          />
-          <Route
-            path='/baz'
-            render={() =>
-              <UniversalComponent
-                page='Baz'
-                onBefore={this.beforeChange}
-                onAfter={this.afterChange}
-                onError={this.handleError}
-              />}
-          />
-          <Route
-            path='/example'
-            render={() =>
-              <UniversalComponent
-                page='Example'
-                onBefore={this.beforeChange}
-                onAfter={this.afterChange}
-                onError={this.handleError}
-              />}
-          />
-          <Route
-            path='/faceySpacey'
-            render={() =>
-              <UniversalComponent
-                page='FaceySpacey'
-                onBefore={this.beforeChange}
-                onAfter={this.afterChange}
-                onError={this.handleError}
-              />}
-          />
-          <Route
-            path='/foo'
-            render={() =>
-              <UniversalComponent
-                page='Foo'
-                onBefore={this.beforeChange}
-                onAfter={this.afterChange}
-                onError={this.handleError}
-              />}
-          />
-          <Route
-            path='/reduxFirstRouter'
-            render={() =>
-              <UniversalComponent
-                page='ReduxFirstRouter'
-                onBefore={this.beforeChange}
-                onAfter={this.afterChange}
-                onError={this.handleError}
-              />}
-          />
-          <Route
-            path='/rudy'
-            render={() =>
-              <UniversalComponent
-                page='Rudy'
-                onBefore={this.beforeChange}
-                onAfter={this.afterChange}
-                onError={this.handleError}
-              />}
-          />
-          <Route
-            path='/universal'
-            render={() =>
-              <UniversalComponent
-                page='Universal'
-                onBefore={this.beforeChange}
-                onAfter={this.afterChange}
-                onError={this.handleError}
-              />}
-          />
-          <Route component={NotFound} />
-        </Switch>
+        </Route>
 
         <div className={styles.info}>
           {this.buttonText()}
@@ -179,16 +90,17 @@ class App extends React.Component {
       </div>
     )
   }
-
   constructor(props) {
     super(props)
 
     const index = 1
-    let page = props.location.pathname.substring(1)
-    if (page === '') {
-      page = 'bar'
+    let page
+    if (props.location.pathname === '' || props.location.pathname === '/') {
+      page = 'Bar'
     }
-
+    else {
+      page = capitalize(props.location.pathname.substring(1))
+    }
     this.state = {
       index,
       loading: false,
@@ -202,13 +114,14 @@ class App extends React.Component {
     if (this.state.loading) return
 
     this.setState((prevState, props) => ({
-      page: props.location.pathname.substring(1)
+      page:
+        props.location.pathname === ''
+          ? 'Bar'
+          : capitalize(props.location.pathname.substring(1))
     }))
   }
 
   beforeChange = ({ isSync }) => {
-    console.log(`before: Sync is ${isSync}`)
-
     if (!isSync) {
       this.setState({ loading: true, error: false })
     }
@@ -219,21 +132,21 @@ class App extends React.Component {
       this.setState({ loading: false, error: false })
     }
     else if (!isServer && !isMount) {
-      this.setState((prevState, props) => ({
+      this.setState(() => ({
         done: true,
         error: false
       }))
     }
   }
 
-  handleError = error => {
+  handleError = () => {
     this.setState({ error: true, loading: false })
   }
 
   buttonText() {
     const { loading, error } = this.state
     if (error) return 'ERROR'
-    return loading ? 'LOADING...' : 'Unregistered Urls default to 404'
+    return loading ? 'LOADING...' : 'Spacey is a Genius'
   }
 }
 
